@@ -1,6 +1,7 @@
 # MEMO-AI
 Memorize with AI
 
+## TEAMS
 - Senior Machine Learning Engineer in Computer Vision
 - Senior Machine Learning Engineer in Computer Vision
 - Senior Backend Developer
@@ -9,7 +10,8 @@ Memorize with AI
 - Senior Mobile IOS & Android Developer
 - Senior UI/UX Developer
 
-Django Framework
-AWS Cloud
-Stable Diffusion (Text-Image)
-Google Extension
+## TOOLS
+- Django Framework
+- AWS Cloud
+- Stable Diffusion (Text-Image)
+- Google Extension
