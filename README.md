@@ -8,3 +8,8 @@ Memorize with AI
 - Senior Frontend Developer
 - Senior Mobile IOS & Android Developer
 - Senior UI/UX Developer
+
+Django Framework
+AWS Cloud
+Stable Diffusion (Text-Image)
+Google Extension
