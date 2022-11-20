@@ -15,3 +15,5 @@ Memorize with AI
 - AWS Cloud
 - Stable Diffusion (Text-Image)
 - Google Extension
+
+https://huggingface.co/spaces/stabilityai/stable-diffusion
