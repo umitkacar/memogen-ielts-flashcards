@@ -17,3 +17,6 @@ Memorize with AI
 - Google Extension
 
 https://huggingface.co/spaces/stabilityai/stable-diffusion
+
+## LOGO
+https://www.brandcrowd.com/
