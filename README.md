@@ -4,6 +4,9 @@ Learn English with AI
 ## OPENAI
 - https://github.com/openai/openai-python/discussions/742
 - https://platform.openai.com/api-keys
+- https://docs.pydantic.dev/latest/concepts/models/
+- https://github.com/openai/openai-cookbook/tree/main/examples
+- https://platform.openai.com/docs/overview
 
 
 ## TEAMS
