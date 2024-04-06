@@ -1,7 +1,6 @@
 # MEMO-IMAGEN
 Learn English with AI
 
-## OPENAI
 - https://github.com/openai/openai-python/discussions/742
 - https://platform.openai.com/api-keys
 - https://docs.pydantic.dev/latest/concepts/models/
