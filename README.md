@@ -1,6 +1,8 @@
 # MEMO-IMAGEN
 Learn English with AI
 
+- https://github.com/openai/openai-python/discussions/742
+
 
 ## TEAMS
 - Senior Machine Learning Engineer in Computer Vision
