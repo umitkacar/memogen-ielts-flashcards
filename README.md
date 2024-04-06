@@ -8,20 +8,17 @@ Learn English with AI
 - https://github.com/openai/openai-cookbook/tree/main/examples
 - https://platform.openai.com/docs/overview
 
-
 ## TEAMS
 - Senior Machine Learning Engineer in Computer Vision
-- Senior Backend Developer
-- Senior DevOps Developer
-- Senior Frontend Developer
-- Senior Mobile IOS & Android Developer
-- Senior UI/UX Developer
+- Senior React Native Developer
 
 ## TOOLS
-- Django Framework
+- React Native
 - AWS Cloud
 - Stable Diffusion (Text-Image)
-- Google Extension
+- LLMs
+- OpenAI
+- Firebase
 
 ## STABLE DIFFUSION
 - https://huggingface.co/spaces/stabilityai/stable-diffusion
@@ -33,4 +30,3 @@ Learn English with AI
 - https://colab.research.google.com/github/huggingface/notebooks/blob/main/diffusers/training_example.ipynb
 
 ## LOGO
-https://www.brandcrowd.com/
