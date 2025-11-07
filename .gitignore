@@ -1,3 +1,101 @@
+# ========================================
+# Node.js / React Native / Expo
+# ========================================
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+bower_components/
+
+# Testing
+coverage/
+*.lcov
+.nyc_output
+*.lcov
+
+# Production builds
+build/
+dist/
+.expo/
+.expo-shared/
+web-build/
+
+# React Native / Expo
+.expo/
+.expo-shared/
+web-build/
+
+# Metro bundler
+.metro-health-check*
+*.jsbundle
+
+# React Native specific
+# Android
+android/app/build/
+*.apk
+*.aab
+*.iml
+.gradle
+local.properties
+*.hprof
+.cxx/
+
+# iOS
+ios/Pods/
+ios/build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+DerivedData/
+*.xcworkspace
+!default.xcworkspace
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Misc
+.DS_Store
+*.pem
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*
+!.env.example
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+.factorypath
+
+# OS files
+Thumbs.db
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# ========================================
+# Python / AI/ML
+# ========================================
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -28,8 +126,6 @@ share/python-wheels/
 MANIFEST
 
 # PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
@@ -76,6 +172,7 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+*.ipynb
 
 # IPython
 profile_default/
@@ -85,13 +182,9 @@ ipython_config.py
 .python-version
 
 # pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
 #Pipfile.lock
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+# PEP 582
 __pypackages__/
 
 # Celery stuff
@@ -101,7 +194,7 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
-# Environments
+# Python Environments
 .env
 .venv
 env/
@@ -127,3 +220,76 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# ========================================
+# AI/ML Models & Data
+# ========================================
+
+# Model files
+*.pth
+*.pt
+*.h5
+*.pb
+*.onnx
+*.pkl
+*.joblib
+*.weights
+models/
+weights/
+checkpoints/
+saved_models/
+
+# Data
+data/
+datasets/
+*.csv
+*.tsv
+*.parquet
+
+# TensorBoard
+runs/
+logs/
+tensorboard/
+
+# ========================================
+# Cloud Services & Secrets
+# ========================================
+
+# API Keys and Secrets
+secrets/
+*.key
+*.pem
+credentials.json
+service-account.json
+config.json
+
+# AWS
+.aws/
+*.pem
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+firebase-export-*/
+
+# Google Cloud
+gcloud/
+.gcloud/
+
+# ========================================
+# Cache & Temporary Files
+# ========================================
+
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+*.tmp
+*.temp
+.tmp/
+.temp/
+*.bak
+*.backup
+*~
