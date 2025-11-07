@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MEMOGEN - Master IELTS Vocabulary with 3D Interactive Flashcards">
+    <meta name="keywords" content="IELTS, vocabulary, flashcards, English learning, IELTS preparation">
+    <meta name="author" content="MEMOGEN Team">
+    <title>MEMOGEN - 3D IELTS Flashcards</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --easy-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --medium-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --difficult-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --card-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            --card-hover-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .level-filter {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeIn 1s ease;
+        }
+
+        .level-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .level-btn.easy {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .level-btn.medium {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .level-btn.difficult {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .level-btn.all {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .level-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .level-btn.active {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-container {
+            perspective: 1500px;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .flashcard {
+            width: 450px;
+            height: 600px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
+            border-radius: 25px;
+        }
+
+        .flashcard:hover {
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 25px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            transform: rotateY(180deg);
+        }
+
+        .level-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .word-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            object-fit: cover;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .word {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .pronunciation {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .part-of-speech {
+            font-size: 1rem;
+            opacity: 0.8;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+        }
+
+        .definition {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .example {
+            font-size: 1.1rem;
+            font-style: italic;
+            opacity: 0.95;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .synonyms {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .synonyms strong {
+            font-weight: 600;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .nav-btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: white;
+            color: #667eea;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .card-info {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .flip-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .flashcard {
+                width: 350px;
+                height: 500px;
+            }
+
+            .word {
+                font-size: 2.5rem;
+            }
+
+            .word-image {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
+            }
+
+            .definition {
+                font-size: 1.2rem;
+            }
+
+            .nav-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .flashcard {
+                width: 300px;
+                height: 450px;
+            }
+
+            .card-face {
+                padding: 25px;
+            }
+
+            .word {
+                font-size: 2rem;
+            }
+
+            .word-image {
+                width: 120px;
+                height: 120px;
+                font-size: 2.5rem;
+            }
+
+            .definition {
+                font-size: 1rem;
+            }
+
+            .example {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎴 MEMOGEN</h1>
+        <p>Master IELTS Vocabulary with 3D Flashcards</p>
+    </div>
+
+    <div class="level-filter">
+        <button class="level-btn all active" onclick="filterLevel('all')">All Levels</button>
+        <button class="level-btn easy" onclick="filterLevel('easy')">🟢 Easy</button>
+        <button class="level-btn medium" onclick="filterLevel('medium')">🟡 Medium</button>
+        <button class="level-btn difficult" onclick="filterLevel('difficult')">🔴 Difficult</button>
+    </div>
+
+    <div class="card-container">
+        <div class="flashcard" onclick="flipCard()">
+            <div class="card-face card-front">
+                <div class="level-badge" id="levelBadge">🟢 Easy</div>
+                <div class="word-image" id="wordImage">🎯</div>
+                <div class="word" id="word">ABUNDANT</div>
+                <div class="pronunciation" id="pronunciation">/əˈbʌndənt/</div>
+                <div class="part-of-speech" id="pos">adjective</div>
+                <div class="flip-hint">👆 Click to flip</div>
+            </div>
+            <div class="card-face card-back">
+                <div class="definition" id="definition">
+                    Available in large quantities; plentiful
+                </div>
+                <div class="example" id="example">
+                    "The forest has abundant wildlife and natural resources."
+                </div>
+                <div class="synonyms" id="synonyms">
+                    <strong>Synonyms:</strong> plentiful, copious, ample, profuse
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousCard()" id="prevBtn">⬅️ Previous</button>
+        <div class="card-info">
+            <span id="currentCard">1</span> / <span id="totalCards">30</span>
+        </div>
+        <button class="nav-btn" onclick="nextCard()" id="nextBtn">Next ➡️</button>
+    </div>
+
+    <script>
+        const vocabulary = [
+            // EASY LEVEL (Band 4-5)
+            {
+                level: "easy",
+                word: "ABUNDANT",
+                pronunciation: "/əˈbʌndənt/",
+                pos: "adjective",
+                definition: "Available in large quantities; plentiful",
+                example: "The forest has abundant wildlife and natural resources.",
+                synonyms: "plentiful, copious, ample, profuse",
+                emoji: "🌾"
+            },
+            {
+                level: "easy",
+                word: "CAPTURE",
+                pronunciation: "/ˈkæptʃər/",
+                pos: "verb",
+                definition: "To take into one's possession or control by force",
+                example: "The photographer managed to capture the perfect sunset moment.",
+                synonyms: "seize, catch, trap, arrest",
+                emoji: "📸"
+            },
+            {
+                level: "easy",
+                word: "DIVERSE",
+                pronunciation: "/daɪˈvɜːrs/",
+                pos: "adjective",
+                definition: "Showing great variety; very different",
+                example: "The city has a diverse population from many different countries.",
+                synonyms: "varied, assorted, mixed, different",
+                emoji: "🌈"
+            },
+            {
+                level: "easy",
+                word: "ESSENTIAL",
+                pronunciation: "/ɪˈsenʃəl/",
+                pos: "adjective",
+                definition: "Absolutely necessary; extremely important",
+                example: "Water is essential for all forms of life on Earth.",
+                synonyms: "vital, crucial, necessary, fundamental",
+                emoji: "⭐"
+            },
+            {
+                level: "easy",
+                word: "FLEXIBLE",
+                pronunciation: "/ˈfleksɪbəl/",
+                pos: "adjective",
+                definition: "Capable of bending easily without breaking; adaptable",
+                example: "The company offers flexible working hours to all employees.",
+                synonyms: "adaptable, adjustable, versatile, pliable",
+                emoji: "🤸"
+            },
+            {
+                level: "easy",
+                word: "GENEROUS",
+                pronunciation: "/ˈdʒenərəs/",
+                pos: "adjective",
+                definition: "Showing kindness and willing to give more than necessary",
+                example: "She made a generous donation to the children's hospital.",
+                synonyms: "kind, charitable, benevolent, liberal",
+                emoji: "💝"
+            },
+            {
+                level: "easy",
+                word: "IMPACT",
+                pronunciation: "/ˈɪmpækt/",
+                pos: "noun",
+                definition: "A strong effect or influence on something",
+                example: "Climate change has a significant impact on global weather patterns.",
+                synonyms: "effect, influence, consequence, impression",
+                emoji: "💥"
+            },
+            {
+                level: "easy",
+                word: "OBVIOUS",
+                pronunciation: "/ˈɒbviəs/",
+                pos: "adjective",
+                definition: "Easily perceived or understood; clear",
+                example: "It was obvious from her smile that she was very happy.",
+                synonyms: "clear, evident, apparent, plain",
+                emoji: "👁️"
+            },
+            {
+                level: "easy",
+                word: "RAPID",
+                pronunciation: "/ˈræpɪd/",
+                pos: "adjective",
+                definition: "Happening in a short time or at great speed",
+                example: "The company experienced rapid growth in the past year.",
+                synonyms: "fast, quick, swift, speedy",
+                emoji: "⚡"
+            },
+            {
+                level: "easy",
+                word: "SIGNIFICANT",
+                pronunciation: "/sɪɡˈnɪfɪkənt/",
+                pos: "adjective",
+                definition: "Sufficiently great or important to be worthy of attention",
+                example: "The discovery led to significant improvements in medical treatment.",
+                synonyms: "important, major, considerable, notable",
+                emoji: "📊"
+            },
+
+            // MEDIUM LEVEL (Band 6-7)
+            {
+                level: "medium",
+                word: "AMBIGUOUS",
+                pronunciation: "/æmˈbɪɡjuəs/",
+                pos: "adjective",
+                definition: "Open to more than one interpretation; unclear or inexact",
+                example: "The politician's ambiguous statement left voters confused about his position.",
+                synonyms: "unclear, vague, equivocal, cryptic",
+                emoji: "❓"
+            },
+            {
+                level: "medium",
+                word: "COHERENT",
+                pronunciation: "/kəʊˈhɪərənt/",
+                pos: "adjective",
+                definition: "Logical and consistent; forming a unified whole",
+                example: "The professor presented a coherent argument supported by strong evidence.",
+                synonyms: "logical, consistent, rational, lucid",
+                emoji: "🧩"
+            },
+            {
+                level: "medium",
+                word: "DETERIORATE",
+                pronunciation: "/dɪˈtɪəriəreɪt/",
+                pos: "verb",
+                definition: "To become progressively worse in quality or condition",
+                example: "The patient's health began to deteriorate rapidly after the surgery.",
+                synonyms: "decline, worsen, degenerate, decay",
+                emoji: "📉"
+            },
+            {
+                level: "medium",
+                word: "ELABORATE",
+                pronunciation: "/ɪˈlæbərət/",
+                pos: "adjective/verb",
+                definition: "Involving many carefully arranged parts; detailed and complicated",
+                example: "The wedding featured elaborate decorations and an eight-course meal.",
+                synonyms: "detailed, intricate, complex, ornate",
+                emoji: "🎨"
+            },
+            {
+                level: "medium",
+                word: "IMPLEMENT",
+                pronunciation: "/ˈɪmplɪment/",
+                pos: "verb",
+                definition: "To put a decision, plan, or agreement into effect",
+                example: "The government plans to implement new environmental policies next year.",
+                synonyms: "execute, apply, carry out, enforce",
+                emoji: "⚙️"
+            },
+            {
+                level: "medium",
+                word: "PROFOUND",
+                pronunciation: "/prəˈfaʊnd/",
+                pos: "adjective",
+                definition: "Very great or intense; having deep meaning",
+                example: "The book had a profound impact on my understanding of history.",
+                synonyms: "deep, intense, extreme, significant",
+                emoji: "🌊"
+            },
+            {
+                level: "medium",
+                word: "SCRUTINIZE",
+                pronunciation: "/ˈskruːtɪnaɪz/",
+                pos: "verb",
+                definition: "To examine or inspect closely and thoroughly",
+                example: "The committee will scrutinize all applications before making a decision.",
+                synonyms: "examine, inspect, study, analyze",
+                emoji: "🔍"
+            },
+            {
+                level: "medium",
+                word: "SUPPRESS",
+                pronunciation: "/səˈpres/",
+                pos: "verb",
+                definition: "To forcibly put an end to; to prevent from being expressed",
+                example: "The government tried to suppress information about the scandal.",
+                synonyms: "repress, restrain, stifle, inhibit",
+                emoji: "🤐"
+            },
+            {
+                level: "medium",
+                word: "VIGOROUS",
+                pronunciation: "/ˈvɪɡərəs/",
+                pos: "adjective",
+                definition: "Strong, healthy, and full of energy",
+                example: "The team launched a vigorous campaign to promote the new product.",
+                synonyms: "energetic, strong, robust, dynamic",
+                emoji: "💪"
+            },
+            {
+                level: "medium",
+                word: "ADVOCATE",
+                pronunciation: "/ˈædvəkeɪt/",
+                pos: "verb/noun",
+                definition: "To publicly recommend or support a particular cause or policy",
+                example: "She has been a strong advocate for children's rights throughout her career.",
+                synonyms: "support, promote, champion, endorse",
+                emoji: "📣"
+            },
+
+            // DIFFICULT LEVEL (Band 8-9)
+            {
+                level: "difficult",
+                word: "AMBIVALENT",
+                pronunciation: "/æmˈbɪvələnt/",
+                pos: "adjective",
+                definition: "Having mixed feelings or contradictory ideas about something",
+                example: "She felt ambivalent about accepting the job offer in a foreign country.",
+                synonyms: "uncertain, conflicted, unsure, indecisive",
+                emoji: "🤔"
+            },
+            {
+                level: "difficult",
+                word: "EPHEMERAL",
+                pronunciation: "/ɪˈfemərəl/",
+                pos: "adjective",
+                definition: "Lasting for a very short time; transitory",
+                example: "The beauty of cherry blossoms is ephemeral, lasting only a few weeks each spring.",
+                synonyms: "fleeting, transient, momentary, brief",
+                emoji: "🌸"
+            },
+            {
+                level: "difficult",
+                word: "JUXTAPOSE",
+                pronunciation: "/ˌdʒʌkstəˈpəʊz/",
+                pos: "verb",
+                definition: "To place or deal with close together for contrasting effect",
+                example: "The artist juxtaposed images of wealth and poverty in her controversial exhibition.",
+                synonyms: "compare, contrast, parallel, set side by side",
+                emoji: "⚖️"
+            },
+            {
+                level: "difficult",
+                word: "PARADIGM",
+                pronunciation: "/ˈpærədaɪm/",
+                pos: "noun",
+                definition: "A typical example or pattern of something; a model",
+                example: "Einstein's theory represented a paradigm shift in our understanding of physics.",
+                synonyms: "model, pattern, example, standard",
+                emoji: "🔬"
+            },
+            {
+                level: "difficult",
+                word: "UBIQUITOUS",
+                pronunciation: "/juːˈbɪkwɪtəs/",
+                pos: "adjective",
+                definition: "Present, appearing, or found everywhere",
+                example: "Smartphones have become ubiquitous in modern society.",
+                synonyms: "omnipresent, pervasive, universal, everywhere",
+                emoji: "🌐"
+            },
+            {
+                level: "difficult",
+                word: "ELOQUENT",
+                pronunciation: "/ˈeləkwənt/",
+                pos: "adjective",
+                definition: "Fluent or persuasive in speaking or writing",
+                example: "The lawyer's eloquent speech convinced the jury of his client's innocence.",
+                synonyms: "articulate, persuasive, expressive, fluent",
+                emoji: "🎭"
+            },
+            {
+                level: "difficult",
+                word: "METICULOUS",
+                pronunciation: "/məˈtɪkjələs/",
+                pos: "adjective",
+                definition: "Showing great attention to detail; very careful and precise",
+                example: "The surgeon's meticulous approach ensured the operation's success.",
+                synonyms: "careful, precise, thorough, fastidious",
+                emoji: "🔬"
+            },
+            {
+                level: "difficult",
+                word: "NUANCE",
+                pronunciation: "/ˈnjuːɑːns/",
+                pos: "noun",
+                definition: "A subtle difference in meaning, opinion, or attitude",
+                example: "The translator captured every nuance of the original text perfectly.",
+                synonyms: "subtlety, shade, distinction, refinement",
+                emoji: "🎨"
+            },
+            {
+                level: "difficult",
+                word: "PRAGMATIC",
+                pronunciation: "/præɡˈmætɪk/",
+                pos: "adjective",
+                definition: "Dealing with things sensibly and realistically; practical",
+                example: "The CEO took a pragmatic approach to solving the company's financial problems.",
+                synonyms: "practical, realistic, sensible, down-to-earth",
+                emoji: "🎯"
+            },
+            {
+                level: "difficult",
+                word: "ZENITH",
+                pronunciation: "/ˈzenɪθ/",
+                pos: "noun",
+                definition: "The highest point reached; the peak of achievement or success",
+                example: "The musician reached the zenith of her career with five Grammy awards.",
+                synonyms: "peak, summit, apex, pinnacle",
+                emoji: "🏔️"
+            }
+        ];
+
+        let currentIndex = 0;
+        let filteredVocabulary = [...vocabulary];
+        let currentLevel = 'all';
+
+        function updateCard() {
+            const card = filteredVocabulary[currentIndex];
+            const flashcard = document.querySelector('.flashcard');
+
+            // Remove flipped class
+            flashcard.classList.remove('flipped');
+
+            // Get gradient based on level
+            const gradients = {
+                easy: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                medium: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                difficult: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
+            };
+
+            document.querySelector('.card-front').style.background = gradients[card.level];
+
+            // Update front
+            document.getElementById('levelBadge').textContent =
+                card.level === 'easy' ? '🟢 Easy' :
+                card.level === 'medium' ? '🟡 Medium' : '🔴 Difficult';
+            document.getElementById('wordImage').textContent = card.emoji;
+            document.getElementById('word').textContent = card.word;
+            document.getElementById('pronunciation').textContent = card.pronunciation;
+            document.getElementById('pos').textContent = card.pos;
+
+            // Update back
+            document.getElementById('definition').textContent = card.definition;
+            document.getElementById('example').textContent = `"${card.example}"`;
+            document.getElementById('synonyms').innerHTML = `<strong>Synonyms:</strong> ${card.synonyms}`;
+
+            // Update navigation
+            document.getElementById('currentCard').textContent = currentIndex + 1;
+            document.getElementById('totalCards').textContent = filteredVocabulary.length;
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').disabled = currentIndex === filteredVocabulary.length - 1;
+        }
+
+        function flipCard() {
+            document.querySelector('.flashcard').classList.toggle('flipped');
+        }
+
+        function nextCard() {
+            if (currentIndex < filteredVocabulary.length - 1) {
+                currentIndex++;
+                updateCard();
+            }
+        }
+
+        function previousCard() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCard();
+            }
+        }
+
+        function filterLevel(level) {
+            currentLevel = level;
+
+            // Update button states
+            document.querySelectorAll('.level-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Filter vocabulary
+            if (level === 'all') {
+                filteredVocabulary = [...vocabulary];
+            } else {
+                filteredVocabulary = vocabulary.filter(v => v.level === level);
+            }
+
+            currentIndex = 0;
+            updateCard();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') previousCard();
+            if (e.key === 'ArrowRight') nextCard();
+            if (e.key === ' ') {
+                e.preventDefault();
+                flipCard();
+            }
+        });
+
+        // Initialize
+        updateCard();
+    </script>
+</body>
+</html>
