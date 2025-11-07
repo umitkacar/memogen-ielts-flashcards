@@ -33,17 +33,17 @@
   "author": {
     "name": "MEMOGEN Team",
     "email": "contact@memogen.com",
-    "url": "https://github.com/umitkacar/MEMO-IMAGEN"
+    "url": "https://github.com/umitkacar/MEMOGEN"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/umitkacar/MEMO-IMAGEN.git"
+    "url": "git+https://github.com/umitkacar/MEMOGEN.git"
   },
   "bugs": {
-    "url": "https://github.com/umitkacar/MEMO-IMAGEN/issues"
+    "url": "https://github.com/umitkacar/MEMOGEN/issues"
   },
-  "homepage": "https://umitkacar.github.io/MEMO-IMAGEN/",
+  "homepage": "https://umitkacar.github.io/MEMOGEN/",
   "devDependencies": {
     "gh-pages": "^6.1.1",
     "prettier": "^3.2.5",

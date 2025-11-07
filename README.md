@@ -5,10 +5,10 @@
 
 <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&duration=2800&pause=2000&color=6366F1&center=true&vCenter=true&width=940&lines=Master+IELTS+Vocabulary+%F0%9F%93%9A;3D+Interactive+Flashcards+%F0%9F%8E%B4;AI-Generated+Visual+Learning+%F0%9F%8E%A8;Spaced+Repetition+System+%F0%9F%A7%A0" alt="Typing SVG" />
 
-[![GitHub Stars](https://img.shields.io/github/stars/umitkacar/MEMO-IMAGEN?style=for-the-badge&logo=github&color=yellow)](https://github.com/umitkacar/MEMO-IMAGEN/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/umitkacar/MEMOGEN?style=for-the-badge&logo=github&color=yellow)](https://github.com/umitkacar/MEMOGEN/stargazers)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge&logo=opensourceinitiative)](LICENSE)
-[![Live Demo](https://img.shields.io/badge/Live-Demo-success.svg?style=for-the-badge&logo=github&logoColor=white)](https://umitkacar.github.io/MEMO-IMAGEN/)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge&logo=github)](https://github.com/umitkacar/MEMO-IMAGEN/pulls)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-success.svg?style=for-the-badge&logo=github&logoColor=white)](https://umitkacar.github.io/MEMOGEN/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge&logo=github)](https://github.com/umitkacar/MEMOGEN/pulls)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
@@ -46,7 +46,7 @@
 
 ## 🚀 Demo
 
-**[🎴 Try Live Demo →](https://umitkacar.github.io/MEMO-IMAGEN/)**
+**[🎴 Try Live Demo →](https://umitkacar.github.io/MEMOGEN/)**
 
 <div align="center">
 
@@ -157,16 +157,16 @@
 
 ### 🌐 Use Online
 
-Simply visit the live demo: **[https://umitkacar.github.io/MEMO-IMAGEN/](https://umitkacar.github.io/MEMO-IMAGEN/)**
+Simply visit the live demo: **[https://umitkacar.github.io/MEMOGEN/](https://umitkacar.github.io/MEMOGEN/)**
 
 ### 💻 Run Locally
 
 ```bash
 # Clone the repository
-git clone https://github.com/umitkacar/MEMO-IMAGEN.git
+git clone https://github.com/umitkacar/MEMOGEN.git
 
 # Navigate to directory
-cd MEMO-IMAGEN
+cd MEMOGEN
 
 # Open in browser
 open index.html
@@ -183,7 +183,7 @@ python -m http.server 8000
 # Select branch: main
 # Select folder: / (root)
 # Save and wait for deployment
-# Your site will be live at: https://YOUR_USERNAME.github.io/MEMO-IMAGEN/
+# Your site will be live at: https://YOUR_USERNAME.github.io/MEMOGEN/
 ```
 
 ---
@@ -402,7 +402,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## 🌟 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=umitkacar/MEMO-IMAGEN&type=Date)](https://star-history.com/#umitkacar/MEMO-IMAGEN&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=umitkacar/MEMOGEN&type=Date)](https://star-history.com/#umitkacar/MEMOGEN&Date)
 
 ---
 
@@ -437,7 +437,7 @@ If you find this project helpful:
 ### 🔗 Connect & Stay Updated
 
 [![GitHub](https://img.shields.io/badge/GitHub-umitkacar-181717?style=for-the-badge&logo=github)](https://github.com/umitkacar)
-[![Website](https://img.shields.io/badge/Website-Visit-blue?style=for-the-badge&logo=google-chrome)](https://umitkacar.github.io/MEMO-IMAGEN/)
+[![Website](https://img.shields.io/badge/Website-Visit-blue?style=for-the-badge&logo=google-chrome)](https://umitkacar.github.io/MEMOGEN/)
 
 ---
 
