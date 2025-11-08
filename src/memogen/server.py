@@ -28,10 +28,10 @@ def start_server(host: str = "127.0.0.1", port: int = 8000) -> None:
             print(f"[MEMOGEN] {self.address_string()} - {format % args}")
 
     with socketserver.TCPServer((host, port), CustomHTTPRequestHandler) as httpd:
-        print(f"🎴 MEMOGEN Server Starting...")
+        print("🎴 MEMOGEN Server Starting...")
         print(f"📂 Serving from: {project_root}")
         print(f"🌐 Access at: http://{host}:{port}")
-        print(f"🎯 Press Ctrl+C to stop")
+        print("🎯 Press Ctrl+C to stop")
         print()
 
         try:

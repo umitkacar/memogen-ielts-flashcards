@@ -2,7 +2,6 @@
 
 import argparse
 import sys
-from pathlib import Path
 
 from memogen import __version__
 
