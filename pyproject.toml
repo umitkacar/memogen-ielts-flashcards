@@ -48,7 +48,9 @@ dev = [
     "pytest-cov>=4.1.0",
     "pytest-asyncio>=0.23.0",
     "pytest-mock>=3.12.0",
+    "pytest-xdist>=3.5.0",  # Parallel test execution
     "httpx>=0.26.0",
+    "coverage[toml]>=7.4.0",
 
     # Linting & Formatting
     "ruff>=0.2.0",
@@ -59,8 +61,16 @@ dev = [
     "mypy>=1.8.0",
     "types-setuptools",
 
+    # Security
+    "bandit[toml]>=1.7.6",
+    "pip-audit>=2.7.0",
+    "safety>=3.0.0",
+
     # Pre-commit
     "pre-commit>=3.6.0",
+
+    # Package Management
+    "uv>=0.1.0",  # Fast Python package installer
 
     # Development
     "ipython>=8.20.0",
@@ -304,6 +314,10 @@ addopts = [
     "--strict-config",
     "--showlocals",
     "--tb=short",
+    # Uncomment below after installing pytest-xdist
+    # "-n", "auto",  # pytest-xdist: auto-detect number of CPUs
+    # "--maxprocesses=4",  # Limit max parallel processes
+    # "--dist=loadscope",  # Distribute tests by scope
 ]
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",

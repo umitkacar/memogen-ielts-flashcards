@@ -101,6 +101,32 @@ repos:
         args: [--baseline, .secrets.baseline]
         exclude: package-lock.json
 
+  # Python package security audit
+  - repo: https://github.com/pyupio/safety
+    rev: 3.0.1
+    hooks:
+      - id: safety
+        args: [--ignore=70612]  # Ignore Jinja2 false positive
+
+  # Dependency vulnerability scanning with pip-audit
+  - repo: https://github.com/pypa/pip-audit
+    rev: v2.7.0
+    hooks:
+      - id: pip-audit
+        args: [--skip-editable]
+
+  # Test coverage check
+  - repo: local
+    hooks:
+      - id: pytest-coverage
+        name: pytest-coverage
+        entry: pytest
+        language: system
+        pass_filenames: false
+        always_run: true
+        args: [--cov=memogen, --cov-report=term-missing, --cov-fail-under=60]
+        stages: [push]
+
   # Commit message linting
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v3.13.0
